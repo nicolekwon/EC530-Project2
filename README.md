@@ -9,6 +9,7 @@
 
 
 - [Descriptions of Project and Phases](#descriptions)
+- [Agile Development Process](#process)
 - [Explanations of Code Set-Up and Layout](#explanations)
 
 ---
@@ -22,18 +23,27 @@
 #### Phases
 
 Phase 0:   (Due 2/13)
-- [ ] Setup your Agile environment for the project (including project, GitHub, testing, etc.)
-- [ ] Setup your branching strategy
+- [ ] Setup your Agile environment for the project (including project, GitHub, testing, etc.).
+- [ ] Setup your branching strategy.
 
 Phase 1:   Device Module (Due 2/13)
-- [ ] Define Interface for devices to ingest data into the system. This includes...
-  - Data Fields (including knowing how to attribute the data to a patient)
-  - Error Conditions
-  - Make sure you include temperature, blood pressure, pulse, oximeter, weight and glucometer and data your system can handle
-- [ ] Implement Shell of the device interface
-- [ ] Implement Unit Tests for the module
-- [ ] Implement a simulation to send data via an example program to help users of your system
-- [ ] Document the interface well
+- [ ] Define Interface for devices to ingest data into the system.
+- [ ] Implement Shell of the device interface.
+- [ ] Implement Unit Tests for the module.
+- [ ] Implement a simulation to send data via an example program to help users of your system.
+- [ ] Document the interface well.
+
+---
+
+## Process
+
+#### Branching Strategy
+
+...
+
+#### Schema
+
+...
 
 ---
 
