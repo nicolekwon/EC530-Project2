@@ -43,7 +43,77 @@ The branches will be based off of the requirements in different phases. This emu
 
 #### Schema
 
-...
+Users
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Device
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Calendar
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Alerts
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Chat
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Voice Transcriber
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Administrative
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Data Management
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+
+Application Interfaces
+| Attribute | Description |
+| --- | --- |
+| Test | Test |
+| Test | Test |
+| Test | Test |
+| Test | Test |
 
 ---
 
