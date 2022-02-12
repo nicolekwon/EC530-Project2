@@ -39,7 +39,7 @@ Phase 1:   Device Module (Due 2/13)
 
 #### Branching Strategy
 
-...
+The branches will be based off of the requirements in different phases. This emulates tasks assigned in sprints in Agile development. These requirements will be defined in Github Issues, with the naming convention of "P" and number to represent the certain phase, followed by "T" and number to represent the certain task. For example, editing the README to add this strategy is done in the "T0T2" branch. The main branch should be looked at during the deadlines of all the phases, as the other branches will be merged into it by then. 
 
 #### Schema
 
