@@ -23,8 +23,8 @@
 #### Phases
 
 Phase 0:   (Due 2/13)
-- [ ] Setup your Agile environment for the project (including project, GitHub, testing, etc.).
-- [ ] Setup your branching strategy.
+- [x] Setup your Agile environment for the project (including project, GitHub, testing, etc.).
+- [x] Setup your branching strategy.
 
 Phase 1:   Device Module (Due 2/13)
 - [ ] Define Interface for devices to ingest data into the system.
