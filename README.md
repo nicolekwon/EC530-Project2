@@ -43,77 +43,66 @@ The branches will be based off of the requirements in different phases. This emu
 
 #### Schema
 
-##### Users
-| Attribute | Description |
-| --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-
 ##### Device
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| Device_ID | Device ID, to identify specific devices |
+| Role_ID | Role ID, to determine privileges and stored in an array because users can have multiple roles |
 
 ##### Calendar
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| Date_List | Date list, to filter through what a user does on certain days |
+| Appointment_List | Appointment list, to store appointments and show open time slots |
 
 ##### Alerts
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| Role_ID | Role ID, to determine privileges and stored in an array because users can have multiple roles |
+| BP_Alert | Blood pressure alert, to make sure the patient measures daily |
+| Temperature_Alert | Temperature alert, to notify the patient if temperature is outside acceptable range |
 
 ##### Chat
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| User_ID | User ID, to identify specific person |
+| Role_ID | Role ID, to determine privileges and stored in an array because users can have multiple roles |
+| Date_List | Date list, to filter through what a user does on certain days |
+| Text_List | Text list, to store different texts from chat |
+| Voice_List | Voice list, to store different voice messages from chat |
+| Video_List | Video list, to store different videos from chat |
 
 ##### Voice Transcriber
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| User_ID | User ID, to identify specific person |
+| Role_ID | Role ID, to determine privileges and stored in an array because users can have multiple roles |
+| Date_List | Date list, to filter through what a user does on certain days |
+| Text_List | Text list, to store different texts from chat |
+| Voice_List | Voice list, to store different voice messages from chat |
+| Video_List | Video list, to store different videos from chat |
+| Transcript_List | Transcript list, for medical professionals to read and search for keywords |
 
 ##### Administrative
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| User_ID | User ID, to identify specific person |
+| Role_ID | Role ID, to determine privileges and stored in an array because users can have multiple roles |
+| App_On | Application on, to enable/disable device maker |
 
 ##### Data Management
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| Patient_List | Patient list, for medical professionals to be able to browse through patients |
+| Measurement_List | Measurements list, to store patients’ input |
 
 ##### Application Interfaces
 | Attribute | Description |
 | --- | --- |
-| Test | Test |
-| Test | Test |
-| Test | Test |
-| Test | Test |
+| User_ID | User ID, to identify specific person |
+| Role_ID | Role ID, to determine privileges and stored in an array because users can have multiple roles |
+| Measurement_List | Measurements list, to store patients’ input |
+| App_On | Application on, to enable/disable device maker |
 
 ---
 
