@@ -27,11 +27,11 @@ Phase 0:   (Due 2/13)
 - [x] Setup your branching strategy.
 
 Phase 1:   Device Module (Due 2/13)
-- [ ] Define Interface for devices to ingest data into the system.
-- [ ] Implement Shell of the device interface.
-- [ ] Implement Unit Tests for the module.
-- [ ] Implement a simulation to send data via an example program to help users of your system.
-- [ ] Document the interface well.
+- [x] Define Interface for devices to ingest data into the system.
+- [x] Implement Shell of the device interface.
+- [x] Implement Unit Tests for the module.
+- [x] Implement a simulation to send data via an example program to help users of your system.
+- [x] Document the interface well.
 
 ---
 
@@ -47,7 +47,8 @@ The branches will be based off of the requirements in different phases. This emu
 | Attribute | Description |
 | --- | --- |
 | Device_ID | Device ID, to identify specific devices |
-| Role_ID | Role ID, to determine privileges and stored in an array because users can have multiple roles |
+| User_ID | User ID, to identify specific person |
+| Data | Values and units related to the user's health (ex. temperature) |
 
 ##### Calendar
 | Attribute | Description |
