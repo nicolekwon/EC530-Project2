@@ -1,0 +1,8 @@
+device_id: 123
+patient_id: 321
+temperature: 98.6 F
+blood_pressure: 120/80 mmHg
+pulse: 60 bpm
+oxygen_level: 95 %
+weight: 140 lbs
+blood_sugar_level: 100 mg/dL
