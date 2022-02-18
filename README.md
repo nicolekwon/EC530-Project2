@@ -33,7 +33,7 @@ Phase 1:   Device Module (Due 2/13)
 - [x] Implement a simulation to send data via an example program to help users of your system.
 - [x] Document the interface well.
 
-Phase 2:   (Due 2/13)
+Phase 2:   (Due 2/22)
 - [ ] Use Flask or Django as your WEB service platform
 - [ ] Integrate your module to become a RESTFUL system
 - [ ] Deploy your system to free [AWS](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc) services or any free cloud of your choosing
