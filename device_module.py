@@ -25,17 +25,17 @@ def create_data(data):
     attributes = data.keys()
 
     # Validating if JSON file is formatted correctly
-    if ('device_id' in attributes and 'patient_id' in attributes and 'data' in attributes):
+    if ('device_id' in attributes and 'user_id' in attributes and 'data' in attributes):
 
         # Checking if device_id is valid
         if ('device_id' in attributes):
             f.write("device_id: %s\n" % data['device_id'])
             print("device_id:", data['device_id'])
 
-        # Checking if patient_id is valid
-        if ('patient_id' in attributes):
-            f.write("patient_id: %s\n" % data['patient_id'])
-            print("patient_id:", data['patient_id'])
+        # Checking if user_id is valid
+        if ('user_id' in attributes):
+            f.write("user_id: %s\n" % data['user_id'])
+            print("user_id:", data['user_id'])
 
         # Checking 
         if ('data' in attributes):
