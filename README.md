@@ -35,7 +35,7 @@ Phase 1:   Device Module (Due 2/13)
 
 Phase 2:   (Due 2/13)
 - [ ] Use Flask or Django as your WEB service platform
-- [ ] Step 2:  Integrate your module to become a RESTFUL system
+- [ ] Integrate your module to become a RESTFUL system
 - [ ] Deploy your system to free [AWS](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc) services or any free cloud of your choosing
 - [ ] Develop simple WEB applications to test your system.
 - [ ] Document your REST APIs on your Github
