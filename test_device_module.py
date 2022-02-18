@@ -10,7 +10,7 @@ def test_device_json():
 
 
 # Unit test for using data 
-def test_device_data():
-	data = device_module.read_device_json('test.json')
-	device_module.create_data(data)
-	assert test.txt == expected_test.txt
+# def test_device_data():
+	# data = device_module.read_device_json('test.json')
+	# device_module.create_data(data)
+	# assert test.txt == expected_test.txt
