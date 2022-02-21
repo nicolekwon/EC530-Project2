@@ -9,5 +9,5 @@ def hello():
     return f'Hello, {escape(name)}!'
 
 
-if __name__ == “__main__”:
+if __name__ == "__main__":
        app.run()
