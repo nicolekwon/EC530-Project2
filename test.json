@@ -1,6 +1,6 @@
 {
   "device_id": 123,
-  "patient_id": 321,
+  "user_id": 321,
   "data": {
     "temperature": {
       "value": "98.6",
