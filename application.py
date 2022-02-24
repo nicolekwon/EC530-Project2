@@ -58,11 +58,10 @@ def hello():
             db = client.create_database(id=DATABASE_ID)
 
         except exceptions.CosmosResourceExistsError:
-            db = client.get_database_client(DATABASE_ID)
-            
-    id = read_Container(db, CONTAINER_ID)
+            db = client.get_database_client(DATABASE_ID)     
+    cid = read_Container(db, CONTAINER_ID)
     
-    return f'Hello, {escape(name)}! id'
+    return f'Hello, {escape(name)}! {escape(cid)}'
 
 
 if __name__ == "__main__":
