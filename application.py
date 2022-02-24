@@ -52,13 +52,7 @@ app = Flask(__name__)
 def hello():
     name = request.args.get("name", "World")
     client = cosmos_client.CosmosClient(HOST, {'masterKey': MASTER_KEY} )
-    try:
-        # setup database for this sample
-        try:
-            db = client.create_database(id=DATABASE_ID)
-
-        except exceptions.CosmosResourceExistsError:
-            db = client.get_database_client(DATABASE_ID)     
+    db = client.get_database_client(DATABASE_ID)     
     cid = read_Container(db, CONTAINER_ID)
     
     return f'Hello, {escape(name)}! {escape(cid)}'
