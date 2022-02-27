@@ -1,67 +1,56 @@
 # save this as app.py
 from flask import Flask, escape, request
 
-import azure.cosmos.cosmos_client as cosmos_client
-import azure.cosmos.exceptions as exceptions
-from azure.cosmos.partition_key import PartitionKey
+import getpass
+import pymongo
 
-import config
-
-HOST = config.settings['host']
-MASTER_KEY = config.settings['master_key']
-DATABASE_ID = config.settings['database_id']
-CONTAINER_ID = config.settings['container_id']
-
-
-def find_container(db, id):
-    print('1. Query for Container')
-
-    containers = list(db.query_containers(
-        {
-            "query": "SELECT * FROM r WHERE r.id=@id",
-            "parameters": [
-                { "name":"@id", "value": id }
-            ]
-        }
-    ))
-
-    if len(containers) > 0:
-        print('Container with id \'{0}\' was found'.format(id))
-    else:
-        print('No container with id \'{0}\' was found'. format(id))
-   
-
-def read_Container(db, id):
-    print("\n4. Get a Container by id")
-
-    try:
-        container = db.get_container_client(id)
-        container.read()
-        print('Container with id \'{0}\' was found, it\'s link is {1}'.format(container.id, container.container_link))
-
-    except exceptions.CosmosResourceNotFoundError:
-        print('A container with id \'{0}\' does not exist'.format(id))
-        
-    return container.id
+from random import randint
 
 
 app = Flask(__name__)
 
 
+# Connecting to and returning MongoDB database
+def connect_db():
+    uri = "mongodb://ec530-project2:DEeOGAUO7d5NKBrebaRLbA8zAIlwTi2MaPMkXQ4SwCJweEpKxviEwWnFN41ngwiTPdvo0UwK93Vk2d9w74rbgw==@ec530-project2.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@ec530-project2@"
+    client = pymongo.MongoClient(uri)
+    try:
+        client.server_info() # validate connection string
+    except pymongo.errors.ServerSelectionTimeoutError:
+        raise TimeoutError("Invalid API for MongoDB connection string or timed out when attempting to connect")
+
+    db = client['ec530-project2']
+
+    return db
+
+
+# GET: Reading a document based on id
+def read_document(collection, document_id):
+    """Return the contents of the document containing document_id"""
+    print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
+    return collection.find_one({"_id": document_id})
+
+
+# GET : Reading all documents in a collection
+def read_all(collection):
+    collection_list=[]
+    for x in collection.find():
+        collection_list.append(x)
+    return collection_list
+
+
 @app.route('/')
 def hello():
     name = request.args.get("name", "World")
-    client = cosmos_client.CosmosClient(HOST, {'masterKey': MASTER_KEY} )
-    try:
-        # setup database for this sample
-        try:
-            db = client.create_database(id=DATABASE_ID)
-
-        except exceptions.CosmosResourceExistsError:
-            db = client.get_database_client(DATABASE_ID)     
-    cid = read_Container(db, CONTAINER_ID)
     
-    return f'Hello, {escape(name)}! {escape(cid)}'
+    db = connect_db()
+    collection = db.get_collection('devices')
+    document_id = 123
+    
+    file = read_document(collection, document_id)
+    collection_list = read_all(collection)
+    
+    return f'{escape(collection_list)}'
 
 
 if __name__ == "__main__":
