@@ -1,6 +1,6 @@
 # EC530-Project2
 
-> This ReadMe details Nicole Kwon's Project 2 for EC530. 
+> This ReadMe details Nicole Kwon's Project 2 for EC530. Click [here](https://ec530-project2-nicolekwon.azurewebsites.net/) to access where the code is running. 
 
 ---
 
