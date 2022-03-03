@@ -39,8 +39,14 @@ def read_all(collection):
     return collection_list
 
 
-@app.route('/devices', methods=['GET'])
+@app.route('/')
 def hello():
+    name = request.args.get("name", "World")
+    return "<p>Hello, World!</p>"
+
+
+@app.route('/devices', methods=['GET'])
+def devices_module():
     name = request.args.get("name", "World")
     
     db = connect_db()
