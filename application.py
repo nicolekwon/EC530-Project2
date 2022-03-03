@@ -39,7 +39,7 @@ def read_all(collection):
     return collection_list
 
 
-@app.route('/')
+@app.route('/devices', methods=['GET'])
 def hello():
     name = request.args.get("name", "World")
     
