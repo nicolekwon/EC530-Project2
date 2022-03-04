@@ -40,6 +40,16 @@ Phase 2:   (Due 2/22)
 - [x] Develop simple WEB applications to test your system.
 - [x] Document your REST APIs on your Github
 
+Phase 3:   (Due 3/4)
+- [ ] Focus on Chat module
+- [ ] Develop...
+  - API User Stories for Chat module
+  - API definitions for Chat Module
+  - REST APIs fro Chat Module
+  - Data Model for Chat Module
+- [ ] Select best database for such module (document or SQL) and explain why
+- [ ] Add it to your project
+
 ---
 
 ## Process
