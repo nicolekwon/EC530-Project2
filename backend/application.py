@@ -1,5 +1,5 @@
 # save this as app.py
-from flask import Flask, escape, request
+from flask import Flask, escape, request, json
 
 import getpass
 import pymongo
@@ -27,8 +27,8 @@ def connect_db():
 # GET: Reading a document based on id
 def read_document(collection, document_id):
     """Return the contents of the document containing document_id"""
-    print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
-    return collection.find_one({"_id": document_id})
+    # print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
+    return json.dumps(collection.find_one({"_id": document_id}))
 
 
 # GET : Reading all documents in a collection
@@ -36,7 +36,7 @@ def read_all(collection):
     collection_list=[]
     for x in collection.find():
         collection_list.append(x)
-    return collection_list
+    return json.dumps(collection_list)
 
 
 @app.route('/')
@@ -47,8 +47,6 @@ def hello():
 
 @app.route('/devices', methods=['GET'])
 def devices_module():
-    name = request.args.get("name", "World")
-    
     db = connect_db()
     collection = db.get_collection('devices')
     document_id = 123
@@ -57,6 +55,16 @@ def devices_module():
     collection_list = read_all(collection)
     
     return f'{escape(collection_list)}'
+
+
+@app.route('/device', methods=['GET'])
+def device_module(document_id):
+    db = connect_db()
+    collection = db.get_collection('devices')
+    
+    file = read_document(collection, document_id)
+    
+    return f'{escape(file)}'
 
 
 if __name__ == "__main__":
