@@ -28,7 +28,7 @@ def connect_db():
 def read_document(collection, document_id):
     """Return the contents of the document containing document_id"""
     # print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
-    return json.dumps(collection.find_one({"_id": document_id}))
+    return collection.find_one({"_id": document_id})
 
 
 # GET : Reading all documents in a collection
@@ -50,10 +50,10 @@ def devices_module():
     db = connect_db()
     collection = db.get_collection('devices')
     document_id = 123
-    
+
     file = read_document(collection, document_id)
     collection_list = read_all(collection)
-    
+
     return f'{escape(collection_list)}'
 
 
@@ -61,11 +61,35 @@ def devices_module():
 def device_module(document_id):
     db = connect_db()
     collection = db.get_collection('devices')
-    
+
     file = read_document(collection, document_id)
+    collection = read_all(collection)
+
+    return f'{escape(collection)}'
+
+
+@app.route('/checkuser/<document_id>', methods=['GET'])
+def check_user(document_id):
+    db = connect_db()
+    collection = db.get_collection('users')
+    file = read_document(collection, document_id)
+    test1 = 1
+
+    # User is not registered by admin
+    if (file == None):
+        return "User is not registered by admin"
+
+    for key in file:
+        if key == "password":
+            test1 = 0
     
-    return f'{escape(file)}'
+    # User can sign up
+    if (test1):
+        return "User can sign up"
+    # User already signed up
+    else:
+        return "User is already signed up"
 
 
 if __name__ == "__main__":
-       app.run()
+    app.run()
