@@ -13,23 +13,64 @@ import {
     Platform,
     Keyboard,
     KeyboardAvoidingView,
-    Alert
+    Alert,
+    ActivityIndicator,
+    FlatList
 } from "react-native";
+
+import axios from 'axios';
 
 const SignUp = ({navigation}) => {
     const [email, emailText] = React.useState(null);
-    const [passwordVisible, setPasswordVisible] = useState(true);
+    const [check, setCheck] = useState(null);
+    const [isLoading, setLoading] = useState(true);
 
-    const checkEmail = async () => {
-        Alert.alert("Checked")
-        /* try {
+    const getCheck = () => {
+        axios
+          .get('https://ec530-project2-nicolekwon.azurewebsites.net/devices')
+          .then(function (response) {
+            // handle success
+            alert(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            // handle error
+            alert(error.message);
+          })
+          .finally(function () {
+            // always executed
+            alert('Finally called');
+          });
+      };
+
+    /* const getCheck = async () => {
+        try {
+          const response = await fetch(
+            'https://ec530-project2-nicolekwon.azurewebsites.net/checkuser/' + email
+          );
+          const json = await response.json();
+          setCheck(json);
+        } catch (error) {
+          console.error(error);
+        } finally {
+            setLoading(false);
+        }
+      };
+
+      useEffect(() => {
+        getCheck();
+      }, []); */ 
+
+    /* const checkEmail = async () => {
+        const resp = await fetch("https://ec530-project2-nicolekwon.azurewebsites.net/checkuser/" + email);
+        setCheck(resp);
+        try {
          const response = await fetch('https://reactnative.dev/movies.json');
          const json = await response.json();
          setData(json.movies);
        } catch (error) {
          console.error(error);
-       } */
-     }
+       }
+     }; */ 
 
     return (
         <View style={StyleSheet.container}>
@@ -73,7 +114,7 @@ const SignUp = ({navigation}) => {
                             </View>
                         </View>
                         <TouchableOpacity style={styles.buttonWrapper}
-                        onPress={() => Alert.alert(email)
+                        onPress={() => {getCheck}
                         //{navigation.navigate('SignUp2')}
                         }
                         >
