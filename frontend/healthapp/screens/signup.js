@@ -17,7 +17,19 @@ import {
 } from "react-native";
 
 const SignUp = ({navigation}) => {
+    const [email, emailText] = React.useState(null);
     const [passwordVisible, setPasswordVisible] = useState(true);
+
+    const checkEmail = async () => {
+        Alert.alert("Checked")
+        /* try {
+         const response = await fetch('https://reactnative.dev/movies.json');
+         const json = await response.json();
+         setData(json.movies);
+       } catch (error) {
+         console.error(error);
+       } */
+     }
 
     return (
         <View style={StyleSheet.container}>
@@ -56,11 +68,14 @@ const SignUp = ({navigation}) => {
                                     style={styles.usernameText}
                                     placeholder="Email"
                                     placeholderTextColor="gray" 
+                                    onChangeText={emailText}
                                 />
                             </View>
                         </View>
                         <TouchableOpacity style={styles.buttonWrapper}
-                        onPress={() => {navigation.navigate('SignUp2')}}
+                        onPress={() => Alert.alert(email)
+                        //{navigation.navigate('SignUp2')}
+                        }
                         >
                             <Text style={styles.buttonTitle}>
                                 <Text>
