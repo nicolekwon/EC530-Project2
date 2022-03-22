@@ -50,6 +50,17 @@ Phase 3:   (Due 3/4)
 - [ ] Select best database for such module (document or SQL) and explain why
 - [ ] Add it to your project
 
+Phase 4:   (Due 4/19)
+- [x] Setup your REACT Native Environment
+- [x] Go through REACT native Tutorial
+- [ ] Use your REST APIs to build part of the application (add register a user, define a user as a medical professional or patient, have the medical professional add a patient to her/his patient list)
+- [ ] Define database model for chat and users
+- [ ] Use your REST APIs to develop a chat base on roles (patient can chat with doctor and nurse assigned to them)
+- [ ] Familiarize yourself with Healthkit and Google Fit
+- [ ] Display Healthkit or Google Fit Data in your app
+- [ ] Use your device API to send health data to your backend
+- [ ] Nurse or Doctor should be able to see health data of any patient
+
 ---
 
 ## Process
