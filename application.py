@@ -5,9 +5,11 @@ import getpass
 import pymongo
 
 from random import randint
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 # Connecting to and returning MongoDB database
