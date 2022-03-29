@@ -13,9 +13,7 @@ import {
     Platform,
     Keyboard,
     KeyboardAvoidingView,
-    Alert,
-    ActivityIndicator,
-    FlatList
+    Alert
 } from "react-native";
 
 import axios from 'axios';
@@ -23,42 +21,37 @@ import axios from 'axios';
 const SignUp = ({navigation}) => {
     const [email, emailText] = React.useState(null);
     const [check, setCheck] = useState(null);
-    const [isLoading, setLoading] = useState(true);
 
     const getCheck = () => {
         axios
-          .get('https://ec530-project2-nicolekwon.azurewebsites.net/devices')
+          .get('http://127.0.0.1:5000/checkuser/kwonn@bu.edu')
           .then(function (response) {
             // handle success
-            alert(JSON.stringify(response.data));
+            Alert.alert("Log message");
           })
           .catch(function (error) {
             // handle error
-            alert(error.message);
+            Alert.alert("Error");
           })
           .finally(function () {
             // always executed
-            alert('Finally called');
+            Alert.alert("Finally called");
           });
       };
 
-    /* const getCheck = async () => {
+    /* const getCheck = () => {
         try {
-          const response = await fetch(
-            'https://ec530-project2-nicolekwon.azurewebsites.net/checkuser/' + email
+          const response = fetch(
+            'https://reactnative.dev/movies.json'
           );
-          const json = await response.json();
-          setCheck(json);
+          const json = response.json();
+          Alert.alert("hello");
+          return json.movies;
         } catch (error) {
+          Alert.alert("uh oh");
           console.error(error);
-        } finally {
-            setLoading(false);
-        }
-      };
-
-      useEffect(() => {
-        getCheck();
-      }, []); */ 
+        }; 
+      } */ 
 
     /* const checkEmail = async () => {
         const resp = await fetch("https://ec530-project2-nicolekwon.azurewebsites.net/checkuser/" + email);
@@ -114,7 +107,8 @@ const SignUp = ({navigation}) => {
                             </View>
                         </View>
                         <TouchableOpacity style={styles.buttonWrapper}
-                        onPress={() => {getCheck}
+                        onPress={() => {getCheck();
+                        }
                         //{navigation.navigate('SignUp2')}
                         }
                         >
@@ -131,7 +125,9 @@ const SignUp = ({navigation}) => {
                                 </Text>
                             </Text>
                             <TouchableOpacity
-                            onPress={() => navigation.navigate('SignIn')}
+                            onPress={() => Alert.alert(check)
+                                //navigation.navigate('SignIn')
+                            }
                             >
                                 <Text style={styles.signinnav}>
                                     <Text>
