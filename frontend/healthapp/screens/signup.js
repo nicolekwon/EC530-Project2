@@ -24,17 +24,20 @@ const SignUp = ({navigation}) => {
 
     const getCheck = () => {
         axios
-          .get('http://127.0.0.1:5000/checkuser/kwonn@bu.edu')
+          .get('https://django-env.eba-n73828us.us-east-1.elasticbeanstalk.com/')
           .then(function (response) {
             // handle success
+            console.log("Hello");
             Alert.alert("Log message");
           })
           .catch(function (error) {
             // handle error
+            console.log("Hello");
             Alert.alert("Error");
           })
           .finally(function () {
             // always executed
+            console.log("Hello");
             Alert.alert("Finally called");
           });
       };
