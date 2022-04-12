@@ -96,6 +96,38 @@ def check_user(document_id):
         return "User is already signed up"
 
 
+@app.route('/signin/<email>/<password>', methods=['GET'])
+def signin(email, password):
+    db = connect_db()
+    collection = db.get_collection('users')
+    file = read_document(collection, email)
+
+    # User is not registered by admin
+    if (file == None):
+        return "Cannot sign in"
+
+    for key in file:
+        if key == "password":
+            if (password == file["password"]):
+                return "Signed in"
+    
+    return "Cannot sign in"
+
+
+@app.route('/signup/<email>/<password>/<role>', methods=['GET', 'POST'])
+def signup(email, password, role):
+    db = connect_db()
+    collection = db.get_collection('users')
+    file = read_document(collection, email)
+
+    # User is not registered by admin
+    if (file == None):
+        document_id = collection.insert_one({'_id': email, 'password': password, 'role': role}).inserted_id
+        return "Signed up"
+    else:
+        return "Cannot sign up"
+
+
 @app.route('/chathome')
 def home():
     return render_template("index.html")
