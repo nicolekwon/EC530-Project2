@@ -29,11 +29,24 @@ def connect_db():
     return db
 
 
-# GET: Reading a document based on id
-def read_document(collection, document_id):
+# GET: Reading a device document based on patient id
+def read_patient_device(collection, email):
     """Return the contents of the document containing document_id"""
     # print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
-    return collection.find_one({"_id": document_id})
+    collection_list=[]
+    for x in collection.find({"user_id": email}):
+        collection_list.append(x)
+    return json.dumps(collection_list)
+
+
+# GET: Reading a device document based on doctor id
+def read_doctor_device(collection, email):
+    """Return the contents of the document containing document_id"""
+    # print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
+    collection_list=[]
+    for x in collection.find({"doctor_id": email}):
+        collection_list.append(x)
+    return json.dumps(collection_list)
 
 
 # GET : Reading all documents in a collection
@@ -54,48 +67,29 @@ def hello():
 def devices_module():
     db = connect_db()
     collection = db.get_collection('devices')
-    document_id = 123
-
-    file = read_document(collection, document_id)
     collection_list = read_all(collection)
+    return collection_list
 
-    return f'{escape(collection_list)}'
 
-
-@app.route('/device', methods=['GET'])
-def device_module(document_id):
+# Listing a patient's device(s)
+@app.route('/patientdevice/<email>', methods=['GET'])
+def patient_device_module(email):
     db = connect_db()
     collection = db.get_collection('devices')
-
-    file = read_document(collection, document_id)
-    collection = read_all(collection)
-
-    return f'{escape(collection)}'
+    col = read_patient_device(collection,email)
+    return col
 
 
-@app.route('/checkuser/<document_id>', methods=['GET'])
-def check_user(document_id):
+# Listing a doctor's device(s)
+@app.route('/doctordevice/<email>', methods=['GET'])
+def doctor_device_module(email):
     db = connect_db()
-    collection = db.get_collection('users')
-    file = read_document(collection, document_id)
-    test1 = 1
-
-    # User is not registered by admin
-    if (file == None):
-        return "User is not registered by admin"
-
-    for key in file:
-        if key == "password":
-            test1 = 0
-    
-    # User can sign up
-    if (test1):
-        return "User can sign up"
-    # User already signed up
-    else:
-        return "User is already signed up"
+    collection = db.get_collection('devices')
+    col = read_doctor_device(collection,email)
+    return col
 
 
+# Signing in
 @app.route('/signin/<email>/<password>', methods=['GET'])
 def signin(email, password):
     db = connect_db()
@@ -114,8 +108,9 @@ def signin(email, password):
     return "Cannot sign in"
 
 
-@app.route('/signup/<email>/<password>/<role>', methods=['GET', 'POST'])
-def signup(email, password, role):
+# Signing up
+@app.route('/signup/<email>/<password>', methods=['GET', 'POST'])
+def signup(email, password):
     db = connect_db()
     collection = db.get_collection('users')
     file = read_document(collection, email)
