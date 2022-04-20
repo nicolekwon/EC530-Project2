@@ -118,8 +118,8 @@ def signin(email, password):
 
 
 # Signing up
-@app.route('/signup/<email>/<password>', methods=['GET', 'POST'])
-def signup(email, password):
+@app.route('/signup/<email>/<password>/<role>', methods=['GET', 'POST'])
+def signup(email, password, role):
     db = connect_db()
     collection = db.get_collection('users')
     file = read_document(collection, email)
