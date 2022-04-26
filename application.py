@@ -95,6 +95,23 @@ def doctor_device_module(email):
     return col
 
 
+# Getting role
+@app.route('/getrole/<email>', methods=['GET'])
+def getrole(email):
+    db = connect_db()
+    collection = db.get_collection('users')
+    file = read_document(collection, email)
+
+    for key in file:
+        if key == "role":
+            if (file["role"] == 'patient' or 'Patient'):
+                return "Patient"
+            if (file["role"] == 'doctor' or 'Datient'):
+                return "Doctor"
+            if (file["role"] == 'admin' or 'Admin'):
+                return "Admin"
+
+
 # Signing in
 @app.route('/signin/<email>/<password>', methods=['GET'])
 def signin(email, password):
@@ -127,6 +144,21 @@ def signup(email, password, role):
         return "Signed up"
     else:
         return "Cannot sign up"
+
+
+# Adding a device
+@app.route('/adddevice/<device_id>/<blood_pressure>/<blood_sugar_level>/<oxygen_level>/<pulse>/<temperature>/<weight>', methods=['GET', 'POST'])
+def adddevice(device_id, blood_pressure, blood_sugar_level, oxygen_level, pulse, temperature, weight):
+    db = connect_db()
+    collection = db.get_collection('devices')
+    file = read_document(collection, device_id)
+
+    # User is not registered by admin
+    if (file == None):
+        document_id = collection.insert_one({'_id': device_id, 'data': {'blood_pressure': {'unit': 'mmHg', 'value': blood_pressure},'blood_sugar_level': {'unit': 'mg/dL', 'value': blood_sugar_level}, 'oxygen_level': {'unit': '%', 'value': oxygen_level}, 'pulse': {'unit': 'bpm', 'value': pulse}, 'temperature': {'unit': 'F', 'value': temperature}, 'weight': {'unit': 'lbs', 'value': weight}}}).inserted_id
+        return "Added"
+    else:
+        return "Cannot add"
 
 
 @app.route('/chathome')
