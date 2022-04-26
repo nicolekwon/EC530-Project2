@@ -29,13 +29,10 @@ def connect_db():
     return db
 
 
-def read_document(collection, email):
+def read_document(collection, document_id):
     """Return the contents of the document containing document_id"""
     # print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
-    collection_list=[]
-    for x in collection.find():
-        collection_list.append(collection.find_one({"user_id": email}))
-    return json.dumps(collection_list)
+    return collection.find_one({"_id": document_id})
 
 
 # GET: Reading a device document based on patient id
