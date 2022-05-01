@@ -159,8 +159,8 @@ def read_all(collection):
 #### Chat 
 User stories include being able to create a conversation with a doctor or nurse as a patient to get medical advice or vice versa, as well as sending text, photos, videos, or voice messages for convenience. 
 
-###### Socket.io
-By utilizing this specific library, two users can connect to the same room at once. 
+###### SOCKET.IO 
+By utilizing this specific library, two users can connect to the same room at once. Below are the 3 main event handlers:
 ```
 @socketio.on('join_room')
 def handle_join_room_event(data):
