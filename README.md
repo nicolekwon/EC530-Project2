@@ -138,7 +138,6 @@ The branches will be based off of the requirements in different phases. This emu
 #### Devices
 The devices module utilizes MongoDB from Azure Cosmos DB to store JSON files with information about a specific device. It holds _id, which is an identifier for the device, user_id, which is an identifier for the user whose data from the device is being stored, and data, which then holds different values and units measured by the device. 
 
-##### API Methods
 ###### GET: Reading a document based on id
 By utilizing the unique ids of the collection and document (in this case, devices and _id), the MongoDB database is accessed and returns the document.
 ```
@@ -159,6 +158,31 @@ def read_all(collection):
 
 #### Chat 
 User stories include being able to create a conversation with a doctor or nurse as a patient to get medical advice or vice versa, as well as sending text, photos, videos, or voice messages for convenience. 
+
+###### Socket.io
+By utilizing this specific library, two users can connect to the same room at once. 
+```
+@socketio.on('join_room')
+def handle_join_room_event(data):
+    app.logger.info("{} has joined the room {}".format(data['username'], data['room']))
+    join_room(data['room'])
+    socketio.emit('join_room_announcement', data, room=data['room'])
+```
+```
+@socketio.on('send_message')
+def handle_send_message_event(data):
+    app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
+                                                                    data['room'],
+                                                                    data['message']))
+    socketio.emit('receive_message', data, room=data['room'])
+```
+```
+@socketio.on('leave_room')
+def handle_leave_room_event(data):
+    app.logger.info("{} has left the room {}".format(data['username'], data['room']))
+    leave_room(data['room'])
+    socketio.emit('leave_room_announcement', data, room=data['room'])
+```
 
 #### Database
 I decided to go with MongoDB was my database due to the flexibility behind their schemas and connected this to Azure. I created two collections: "users" to store their login credentials and roles and "devices" to store who has access to them and their data. 
