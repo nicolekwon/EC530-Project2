@@ -1,16 +1,14 @@
 # EC530-Project2
 
-> This ReadMe details Nicole Kwon's Project 2 for EC530. Click [here](https://ec530-project2-nicolekwon.azurewebsites.net/) to access where the code is running. 
+> This ReadMe details Nicole Kwon's Project 2 for EC530. Click [here](https://ec530-project2-nicolekwon.azurewebsites.net/) to access where the backend code is running. 
 
 ---
 
 
 ## Table of Contents
 
-
 - [Descriptions of Project and Phases](#descriptions)
 - [Development Process](#process)
-- [Explanations of Code Set-Up and Layout](#explanations)
 
 ---
 
@@ -187,13 +185,8 @@ def handle_leave_room_event(data):
 #### Database
 I decided to go with MongoDB was my database due to the flexibility behind their schemas and connected this to Azure. I created two collections: "users" to store their login credentials and roles and "devices" to store who has access to them and their data. 
 
----
-
-## Explanations
-
-#### Set-Up 
-
-...
+#### Frontend
+I decided to go with React for my frontend, as I wanted to create my application as a web app. The user can sign up or log in, followed by being able to see their device data. 
 
 ---
 
