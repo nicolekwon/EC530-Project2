@@ -135,6 +135,28 @@ The branches will be based off of the requirements in different phases. This emu
 | Measurement_List | Measurements list, to store patients’ input |
 | App_On | Application on, to enable/disable device maker |
 
+#### Devices
+The devices module utilizes MongoDB from Azure Cosmos DB to store JSON files with information about a specific device. It holds _id, which is an identifier for the device, user_id, which is an identifier for the user whose data from the device is being stored, and data, which then holds different values and units measured by the device. 
+
+##### API Methods
+###### GET: Reading a document based on id
+By utilizing the unique ids of the collection and document (in this case, devices and _id), the MongoDB database is accessed and returns the document.
+```
+def read_document(collection, document_id):
+    """Return the contents of the document containing document_id"""
+    print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
+    return collection.find_one({"_id": document_id})
+```
+###### GET: Reading all documents in a collection
+By utilizing the unique id of the collection (in this case, devices), the MongoDB database is accessed; the collection is iterated through, and this is returned as a list.
+```
+def read_all(collection):
+    collection_list=[]
+    for x in collection.find():
+        collection_list.append(x)
+    return collection_list
+```
+
 #### Chat 
 User stories include being able to create a conversation with a doctor or nurse as a patient to get medical advice or vice versa, as well as sending text, photos, videos, or voice messages for convenience. 
 
