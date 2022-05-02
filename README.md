@@ -53,12 +53,9 @@ Phase 4:   (Due 4/19)
 
 #### Project 4
 
-Phase 1:  Build Queue System
-- [] Step 1: Develop a queue system that can exercise your requirements with stub functions 
-- [] Step 2: Test it with different parameters, include tracking interface to show how many processes are going on and success of each
-
-Phase 2:  Speech to Text
-- [] Integrate [Speech to Text](https://cloud.google.com/speech-to-text/docs/optimizing-audio-files-for-speech-to-text ), for example
+Build Queue System
+- [x] Step 1: Develop a queue system that can exercise your requirements with stub functions 
+- [x] Step 2: Test it with different parameters, include tracking interface to show how many processes are going on and success of each
 
 ---
 
@@ -186,7 +183,15 @@ def handle_leave_room_event(data):
 I decided to go with MongoDB was my database due to the flexibility behind their schemas and connected this to Azure. I created two collections: "users" to store their login credentials and roles and "devices" to store who has access to them and their data. 
 
 #### Frontend
-I decided to go with React for my frontend, as I wanted to create my application as a web app. The user can sign up or log in, followed by being able to see their device data. 
+I decided to go with React for my frontend, as I wanted to create my application as a web app. The user can sign up or log in, followed by being able to see their device data. Sign up or sign in using the following credentials to also see device data: 
+```
+Email: patient@gmail.com
+Password: patient123
+```
+```
+Email: doctor@gmail.com
+Password: doctor123
+```
 
 ---
 
