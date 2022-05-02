@@ -1,26 +1,20 @@
 # EC530-Project2
 
-> This ReadMe details Nicole Kwon's Project 2 for EC530. Click [here](https://ec530-project2-nicolekwon.azurewebsites.net/) to access where the code is running. 
+> This ReadMe details Nicole Kwon's Project 2 for EC530. Click [here](https://ec530-project2-nicolekwon.azurewebsites.net/) to access where the backend code is running. 
 
 ---
 
 
 ## Table of Contents
 
-
 - [Descriptions of Project and Phases](#descriptions)
-- [Agile Development Process](#process)
-- [Explanations of Code Set-Up and Layout](#explanations)
+- [Development Process](#process)
 
 ---
 
 ## Descriptions
 
-#### Project
-
-...
-
-#### Phases
+#### Project 2
 
 Phase 0:   (Due 2/13)
 - [x] Setup your Agile environment for the project (including project, GitHub, testing, etc.).
@@ -41,25 +35,30 @@ Phase 2:   (Due 2/22)
 - [x] Document your REST APIs on your Github
 
 Phase 3:   (Due 3/4)
-- [ ] Focus on Chat module
-- [ ] Develop...
+- [x] Focus on Chat module
+- [x] Develop...
   - API User Stories for Chat module
   - API definitions for Chat Module
   - REST APIs fro Chat Module
   - Data Model for Chat Module
-- [ ] Select best database for such module (document or SQL) and explain why
-- [ ] Add it to your project
+- [x] Select best database for such module (document or SQL) and explain why
+- [x] Add it to your project
 
 Phase 4:   (Due 4/19)
 - [x] Setup your REACT Native Environment
 - [x] Go through REACT native Tutorial
-- [ ] Use your REST APIs to build part of the application (add register a user, define a user as a medical professional or patient, have the medical professional add a patient to her/his patient list)
-- [ ] Define database model for chat and users
-- [ ] Use your REST APIs to develop a chat base on roles (patient can chat with doctor and nurse assigned to them)
-- [ ] Familiarize yourself with Healthkit and Google Fit
-- [ ] Display Healthkit or Google Fit Data in your app
-- [ ] Use your device API to send health data to your backend
-- [ ] Nurse or Doctor should be able to see health data of any patient
+- [x] Use your REST APIs to build part of the application (add register a user, define a user as a medical professional or patient, have the medical professional add a patient to her/his patient list)
+- [x] Define database model for chat and users
+- [x] Use your device API to send health data to your backend
+
+#### Project 4
+
+Phase 1:  Build Queue System
+- [] Step 1: Develop a queue system that can exercise your requirements with stub functions 
+- [] Step 2: Test it with different parameters, include tracking interface to show how many processes are going on and success of each
+
+Phase 2:  Speech to Text
+- [] Integrate [Speech to Text](https://cloud.google.com/speech-to-text/docs/optimizing-audio-files-for-speech-to-text ), for example
 
 ---
 
@@ -76,6 +75,7 @@ The branches will be based off of the requirements in different phases. This emu
 | --- | --- |
 | Device_ID | Device ID, to identify specific devices |
 | User_ID | User ID, to identify specific person |
+| Doctor_ID | Doctor ID, to identify specific doctor |
 | Data | Values and units related to the user's health (ex. temperature) |
 
 ##### Calendar
@@ -133,17 +133,60 @@ The branches will be based off of the requirements in different phases. This emu
 | Measurement_List | Measurements list, to store patients’ input |
 | App_On | Application on, to enable/disable device maker |
 
----
+#### Devices
+The devices module utilizes MongoDB from Azure Cosmos DB to store JSON files with information about a specific device. It holds _id, which is an identifier for the device, user_id, which is an identifier for the user whose data from the device is being stored, and data, which then holds different values and units measured by the device. 
 
-## Explanations
+###### GET: Reading a document based on id
+By utilizing the unique ids of the collection and document (in this case, devices and _id), the MongoDB database is accessed and returns the document.
+```
+def read_document(collection, document_id):
+    """Return the contents of the document containing document_id"""
+    print("Found a document with _id {}: {}".format(document_id, collection.find_one({"_id": document_id})))
+    return collection.find_one({"_id": document_id})
+```
+###### GET: Reading all documents in a collection
+By utilizing the unique id of the collection (in this case, devices), the MongoDB database is accessed; the collection is iterated through, and this is returned as a list.
+```
+def read_all(collection):
+    collection_list=[]
+    for x in collection.find():
+        collection_list.append(x)
+    return collection_list
+```
 
-#### Set-Up 
+#### Chat 
+User stories include being able to create a conversation with a doctor or nurse as a patient to get medical advice or vice versa, as well as sending text, photos, videos, or voice messages for convenience. 
 
-...
+###### SOCKET.IO 
+By utilizing this specific library, two users can connect to the same room at once. Below are the 3 main event handlers:
+```
+@socketio.on('join_room')
+def handle_join_room_event(data):
+    app.logger.info("{} has joined the room {}".format(data['username'], data['room']))
+    join_room(data['room'])
+    socketio.emit('join_room_announcement', data, room=data['room'])
+```
+```
+@socketio.on('send_message')
+def handle_send_message_event(data):
+    app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
+                                                                    data['room'],
+                                                                    data['message']))
+    socketio.emit('receive_message', data, room=data['room'])
+```
+```
+@socketio.on('leave_room')
+def handle_leave_room_event(data):
+    app.logger.info("{} has left the room {}".format(data['username'], data['room']))
+    leave_room(data['room'])
+    socketio.emit('leave_room_announcement', data, room=data['room'])
+```
 
-#### Layout
+#### Database
+I decided to go with MongoDB was my database due to the flexibility behind their schemas and connected this to Azure. I created two collections: "users" to store their login credentials and roles and "devices" to store who has access to them and their data. 
 
-...
+#### Frontend
+I decided to go with React for my frontend, as I wanted to create my application as a web app. The user can sign up or log in, followed by being able to see their device data. 
 
 ---
 
