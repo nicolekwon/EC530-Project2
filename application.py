@@ -4,6 +4,7 @@ from flask_socketio import SocketIO, join_room, leave_room
 
 import getpass
 import pymongo
+import threading, queue
 
 from random import randint
 from flask_cors import CORS
@@ -69,6 +70,44 @@ def hello():
     return "<p>Hello, World!</p>"
 
 
+counter = ''
+count = 1
+
+q = queue.Queue()
+# Tracking the queue
+def worker():
+    global counter
+    while True:
+        item = q.get()
+        if (item == '1'):
+            signin('admin@gmail.com', 'admin123')
+            counter = counter + 'Finished logging in' + '\n'
+        elif (item == '2'):
+            patient_device_module('patient@gmail.com')
+            counter = counter + 'Finished retrieving device information' + '\n'
+        else:
+            getrole('doctor@gmail.com'); 
+            counter = counter + 'Finished retrieving role' + '\n'
+        q.task_done()
+
+
+@app.route('/queue')
+def queue():
+    global counter, count
+    # Turn-on the worker thread.
+    threading.Thread(target=worker, daemon=True).start()
+
+    # Send thirty task requests to the worker.
+    q.put(str(count))
+    count=count+1
+    if (count == 4):
+        count = 1
+
+    # Block until all tasks are done.
+    q.join()
+    return render_template('queue.html', value=counter)
+
+
 @app.route('/devices', methods=['GET'])
 def devices_module():
     db = connect_db()
@@ -95,7 +134,7 @@ def doctor_device_module(email):
     return col
 
 
-# Getting role
+# Getting role of a user
 @app.route('/getrole/<email>', methods=['GET'])
 def getrole(email):
     db = connect_db()
